@@ -1,0 +1,46 @@
+.e-ident{
+    text-indent: 4ch;
+}
+
+.e-column-2{
+    column-count: 2;
+    column-gap: 14px;
+    text-wrap: pretty;
+    min-height: 200px;
+}
+
+.e-column-3{
+    column-count: 3;
+    column-gap: 14px;
+    text-wrap: pretty;
+    min-height: 200px;
+}
+
+.e-column-rule{
+    column-rule: solid;
+}
+
+.e-width-chars-80{
+    max-width: 80ch;
+}
+
+.e-pretty{
+    text-wrap: pretty;    
+}
+
+.e-justify{
+    text-align: justify !important;
+}
+
+.e-capitalize{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 3rem;
+    float:left;
+    line-height: 3rem;    
+}
+
+/* Evita el salto de linea */
+.e-no-wrap{
+    text-wrap: nowrap;
+}

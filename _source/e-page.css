@@ -1,0 +1,38 @@
+:root{
+    --page_size_x: 215.9mm;
+    --page_size_y: 279.4mm;
+    --page_content_x: 215.9mm;
+    --page_aside_x: 0mm;
+}
+
+page{
+    display: block;    
+    position: relative;
+    width: var(--page_size_x);
+    height: var(--page_size_y);    
+    margin: 0 auto;
+    padding: 0;
+    border: dashed 3px rgba(53, 96, 153, 0.1);
+    /* background: yellow; */
+}
+
+page_content{
+    display: block;
+    position: relative;
+    width:  100%;
+    height: 100%;    
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden; 
+    right: 0;
+    /* background: blue; */
+}
+
+.page_number{
+    color:  #01b8ee !important; 
+    font-weight: bold;
+    position: absolute;    
+    bottom: 10mm;
+    right: 10mm;
+    opacity: 0.4;
+}
