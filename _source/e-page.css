@@ -13,7 +13,8 @@ page{
     margin: 0 auto;
     padding: 0;
     border: dashed 3px rgba(53, 96, 153, 0.1);
-    /* background: yellow; */
+    margin-block: 12mm;
+    /* background: yellow;*/
 }
 
 page_content{
