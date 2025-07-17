@@ -1,0 +1,177 @@
+/* GRID LAYOUT 1 */
+.grid-layout-1{
+    width: 100%;
+    height: 100%;     
+    display: grid;  
+    grid-template-rows: 48mm 1fr 1fr 1fr;
+    grid-template-columns: 12mm 1fr 1fr 1fr;  
+    
+    .barra-decorativa{
+        height: 2mm;
+        width: 100%;
+        background-color: #454C02;
+        margin-bottom:2.5mm;
+        opacity: 0.2;
+    }
+
+    .barra-decorativa2{
+        height: 2mm;
+        width: 50%;
+        background-color: #454C02;
+        margin-bottom:2.5mm;
+        opacity: 0.2;
+    }
+}
+
+/* titulo */
+.grid-layout-1> :nth-child(1){    
+    /* background-color: rgba(1, 184, 238, 20%); */
+    grid-column: 2/4;
+    grid-row: 1/2;
+    /* border: solid 1px black; */
+    overflow: visible;
+    padding-top: 12mm;
+}
+
+/* mapa*/
+.grid-layout-1> :nth-child(2){    
+    /* background-color: rgba(22, 24, 175, 0.2); */
+    grid-column: 2/4;
+    grid-row: 2/4;
+    /* border: solid 1px black; */
+    overflow: hidden;
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    
+    filter: drop-shadow(2px 4px 6px rgba(50, 94, 10, 0.2));;
+
+    background-color: rgba(255, 255, 255, 0.2); /* Color de fondo semitransparente */
+    -webkit-backdrop-filter: blur(10px); /* Para compatibilidad con Safari */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* descripción Sectores Columna 2 */
+.grid-layout-1> :nth-child(3){    
+    /* background-color: rgba(86, 86, 134, 0.2); */
+    grid-column: 2/3;
+    grid-row: 4/5;
+    /* border: solid 1px black; */
+    overflow: hidden;
+    padding-top: 12mm;
+    padding-left: 0px;
+
+    h1{
+        color: rgba(3, 99, 94, 0.7)!important;        
+        font-size: 6mm !important;    
+    }
+
+    p{
+        padding-left: 6mm;
+        padding-right: 12mm;
+        font-weight: 900 !important;
+        color: #555525 !important;
+    }
+
+    .separador{
+        height: 1mm;
+        width: calc(100% - 10mm);
+        background: rgb(2, 160, 152);
+        margin-top: 3mm;
+        margin-bottom: 3mm;
+        margin-left: 3mm;  
+        opacity: 0.3;   
+    }
+}
+
+/* descripción Sectores Columna 3 */
+.grid-layout-1> :nth-child(4){    
+    /* background-color: rgba(86, 86, 134, 0.2); */
+    grid-column: 3/4;
+    grid-row: 4/5;
+    /* border: solid 1px black; */
+    overflow: hidden;
+    padding-top: 6mm;
+    
+    h1{
+        color: rgba(3, 99, 94, 0.7)!important;
+        padding-left: 6mm;
+        font-size: 6mm !important;    
+    }
+
+    p{
+        padding-left: 6mm;
+        padding-right: 12mm;
+        font-weight: 900 !important;
+        color: #555525 !important;
+        
+    }
+
+    .separador{
+        height: 1mm;
+        width: calc(100% - 10mm);
+        background: rgb(2, 160, 152);
+        margin-top: 3mm;
+        margin-bottom: 3mm;
+        margin-left: 3mm;  
+        opacity: 0.3;   
+    }
+}
+
+/* descripción sectores 4 */
+.grid-layout-1> :nth-child(5){    
+    background-color: rgba(218, 219, 204, 59%);
+    grid-column: 4/5;
+    grid-row: 2/5;
+    /* border: solid 1px black; */
+    overflow: hidden;
+    padding-top: 12mm;
+    padding-right: 3mm;
+
+    h1{
+        color: rgba(3, 99, 94, 0.7)!important;
+        padding-left: 6mm;
+        font-size: 6mm !important;    
+    }
+
+    p{
+        padding-left: 6mm;
+        padding-right: 12mm;
+        font-weight: 900 !important;
+        color: #555525 !important;
+    }
+
+    .separador{
+        height: 1mm;
+        width: calc(100% - 10mm);
+        background: rgb(2, 160, 152);
+        margin-top: 3mm;
+        margin-bottom: 3mm;
+        margin-left: 3mm;  
+        opacity: 0.3;   
+    }
+}
+
+
+
+/* Cuadro 1 imagen decorativa */ 
+.grid-layout-1> :nth-child(6){    
+    /* background-color: rgba(182, 185, 190, 0.2);     */
+    grid-column: 4/5;
+    grid-row: 1;
+    overflow: hidden;
+    /* border: solid 1px black; */
+}
+
+/*cuadro decorativo*/
+.grid-layout-1> :nth-child(7){    
+    /* background-color: rgba(50, 94, 10, 0.2); */
+    grid-column: 1;
+    grid-row: 3/5;
+    /* border: solid 1px black; */
+    overflow: hidden;
+}
