@@ -116,7 +116,7 @@
         th {
             padding: 1mm;
             background-color: #c6c9a7;
-            color: white;
+            color: #ff0000;
             font-weight: bold;
         }
         tr:nth-child(even) {
@@ -128,7 +128,7 @@
         .total {
             font-weight: bold;
             background-color: #c6c9a7 !important;
-            color: white;
+            color: #ff0000;
         }    
 }
 
