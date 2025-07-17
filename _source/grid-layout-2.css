@@ -47,7 +47,7 @@
     .rectangulo{
         width: 80%;
         height: 63%;
-        background-color: #c6c9a7;
+        background-color: #e9eae1;
         position: absolute; 
         z-index: 1000;       
     }
