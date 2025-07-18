@@ -1,0 +1,184 @@
+#interactive-map{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    .hidden{
+        visibility: hidden;
+    }
+
+    header{
+        padding: 10px;
+        background: #f5f5f5;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: end;
+        align-items: start;
+        flex-direction: row;
+        align-items: baseline;
+        gap:7px;
+
+
+        #buttonLoadMap{
+            width: 100%;
+            cursor: pointer;
+            background-color:  rgba(3, 99, 94, 0.7);
+            color: white;
+            padding: 3mm;
+            border: 1px solid #ccc;
+            border-radius: 4px; 
+        }
+
+        #buttonLoadMap:disabled{
+            cursor:default;
+            color:  rgba(25, 230, 219, 0.7);
+        }
+
+        .show-options-container{    
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: start;
+            gap: 2px;
+            position:relative;
+            top: -12px;
+
+
+            label{
+                font-size: 0.7rem;
+                color: #909090;
+                white-space: nowrap;       
+                overflow: hidden;          
+                text-overflow: ellipsis;   
+                max-width: 200px;          
+                display: inline-block;     
+                vertical-align: middle;    
+            }
+            
+        
+            input[type="radio"]{
+                vertical-align: bottom;
+            }
+        }
+
+        .button-options{
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: end;
+            gap:3px;
+
+            button{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+                margin: 0;
+                font-size: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 4px;        
+                height: 30px;
+                width: 30px;      
+                cursor: pointer;
+                background-color:  rgba(3, 99, 94, 0.7);
+                color: white;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color:  rgba(4, 121, 115, 0.7)!important;
+                }
+
+                img {
+                    display: block;
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
+    }
+
+        .searcher {        
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            align-items: start;            
+            gap: 3px;
+
+            select {
+                padding: 8px 12px;
+                font-size: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                width: 45ch;        
+                height: 40px;
+            }
+
+            .button-round {
+                width: 40px;
+                min-width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: none;
+                color: white;
+                cursor: pointer;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;        
+                background: #454C02;
+            }
+
+            .button-round:hover {
+                background: #687403;
+                transform: scale(1.01);
+            }
+        }
+        
+    }
+
+    section.info{
+            width: 100%;
+            height: 7mm;
+        }
+
+        #svg-container {
+            flex-grow: 1;
+            background: white;
+            overflow: hidden;
+        }
+
+
+        .transparent{
+        fill: transparent !important;
+    }
+
+    .border-golden-highlight{    
+        stroke: gold; /* Color del borde */
+        stroke-width: 18; /* Grosor de la línea */
+        fill: none;  /*Si no quieres relleno */
+        filter: url(#resplandor-dorado); /* Filtro personalizado */
+    }
+
+    .road-highlight{
+        stroke: rgb(255, 123, 0); /* Color del borde */
+        stroke-width: 18; /* Grosor de la línea */
+        fill: none;  /*Si no quieres relleno */
+        filter: url(#resplandor-dorado); /* Filtro personalizado */
+    }
+
+    .primary-street:hover,
+    .collector-street:hover,
+    .local-street:hover,
+    .passage:hover{
+        stroke: rgb(255, 102, 0); /* Color del borde */
+        stroke-width: 18 !important; /* Grosor de la línea */
+        fill: none; /* Si no quieres relleno */
+        filter: url(#resplandor-dorado); 
+    }
+
+}

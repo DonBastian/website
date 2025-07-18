@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="_source/layout-3.css">
     <link rel="stylesheet" href="_source/layout-4.css">
     <link rel="stylesheet" href="_source/layout-5.css">
+    <link rel="stylesheet" href="_source/interactiveMap.css">
 
     <!-- <link href="" rel="shortcut icon"> Agregar Icono-->
 
@@ -908,7 +909,7 @@
          <!-- Sexta Página - Calles Principales -->
      <page>
         <page_content class="layout-5">
-            <img src="_source/images/SectoresSeparadosEsteOeste.png" alt="">
+            <img src="./_source/images/SectoresSeparadosEsteOeste.png" alt="">
             
             <h1 style="margin-top: 12mm !important">Calles Principales</h1>
             <h2>Semi-principales</h2>
@@ -1003,7 +1004,62 @@
         </page_content>
      </page>
 
+     <!-- Séptima Página - Mapa Interactivo -->
+     <page>
+        <page-content id="interactive-map">
+            <header>                    
+                
+                <button id="buttonLoadMap">Cargar Mapa Interactivo</button>
 
+                <div class="show-options-container hidden" id="show-options-container">                     
+                    <label style="min-width: 15ch;" for="show-all-street">
+                        <input class = "show-option" type="radio" id="show-all-street" name="show-options"> 
+                        Mostrar todas las calles
+                    </label>
+
+                    <label style="min-width: 15ch;" for="show-principals">                
+                        <input class = "show-option" type="radio" id="show-principals" name="show-options" checked>
+                        Mostrar solo principales
+                    </label>
+
+                    <label style="min-width: 15ch;" for="show-sectors">                
+                        <input class = "show-option" type="radio" id="show-sectors" name="show-options2">
+                        Mostrar sectores
+                    </label>     
+                </div>
+
+                <div class="button-options hidden" id = "button-options">
+                    <button onclick='setZoom(0.25)'>
+                        <img src="./_source/images/zoom_out.svg" alt="Icono">
+                    </button>
+
+                    <button onclick='setZoom(1.1)'>
+                        <img src="./_source/images/zoom_in.svg" alt="Icono">
+                    </button>                    
+                </div>
+                                              
+                <div class="searcher hidden" id="searcher">
+                    <select id="selector">
+                        <option value="">Seleccione</option>                        
+                    </select>
+                    <button class="button-round" onclick='moveToSelectorValue()'><img src="./_source/images/search.svg" alt="Icono" width="24" height="24"></button>
+                </div>                                    
+            </header>
+
+            <section id = "interactive-map-info-container">
+                <h2 id="interactive-map-info">...</h2>
+            </section>
+
+            <div id="svg-container">
+                <svg></svg>
+            </div>
+
+            <script src = "./_source/interactiveMap.js"></script>
+            <script src = "./_source/panzoom.js"></script>
+            <script src = "./_source/dataSectors.js"></script>
+            <script src = "./_source/dataRoads.js"></script>
+        </page-content>
+     </page>
 </body>
 
 </html>
