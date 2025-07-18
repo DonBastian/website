@@ -315,6 +315,8 @@ document.getElementById('buttonLoadMap').addEventListener('click', function() {
               }
             }, { capture: true, passive: false });
 
+            svgContainer.style.cursor="move";
+
             // Load sectors data
             let sectors = [];
             sectors.push(createPolygon(sector0, 'rgba(153, 102, 255, 0.5)')); 
