@@ -1,5 +1,5 @@
 /* GRID LAYOUT 1 */
-.grid-layout-1{
+.layout-1{
     width: 100%;
     height: 100%;     
     display: grid;  
@@ -24,7 +24,7 @@
 }
 
 /* titulo */
-.grid-layout-1> :nth-child(1){    
+.layout-1> :nth-child(1){    
     /* background-color: rgba(1, 184, 238, 20%); */
     grid-column: 2/4;
     grid-row: 1/2;
@@ -34,7 +34,7 @@
 }
 
 /* mapa*/
-.grid-layout-1> :nth-child(2){    
+.layout-1> :nth-child(2){    
     /* background-color: rgba(22, 24, 175, 0.2); */
     grid-column: 2/4;
     grid-row: 2/4;
@@ -56,7 +56,7 @@
 }
 
 /* descripción Sectores Columna 2 */
-.grid-layout-1> :nth-child(3){    
+.layout-1> :nth-child(3){    
     /* background-color: rgba(86, 86, 134, 0.2); */
     grid-column: 2/3;
     grid-row: 4/5;
@@ -91,7 +91,7 @@
 }
 
 /* descripción Sectores Columna 3 */
-.grid-layout-1> :nth-child(4){    
+.layout-1> :nth-child(4){    
     /* background-color: rgba(86, 86, 134, 0.2); */
     grid-column: 3/4;
     grid-row: 4/5;
@@ -128,7 +128,7 @@
 }
 
 /* descripción sectores 4 */
-.grid-layout-1> :nth-child(5){    
+.layout-1> :nth-child(5){    
     /* background-color: rgba(218, 219, 204, 59%); */
     grid-column: 4/5;
     grid-row: 2/5;
@@ -167,7 +167,7 @@
 
 
 /* Cuadro 1 imagen decorativa */ 
-.grid-layout-1> :nth-child(6){    
+.layout-1> :nth-child(6){    
     /* background-color: rgba(182, 185, 190, 0.2);     */
     grid-column: 4/5;
     grid-row: 1;
@@ -176,7 +176,7 @@
 }
 
 /*cuadro decorativo*/
-.grid-layout-1> :nth-child(7){    
+.layout-1> :nth-child(7){    
     /* background-color: rgba(50, 94, 10, 0.2); */
     grid-column: 1;
     grid-row: 3/5;

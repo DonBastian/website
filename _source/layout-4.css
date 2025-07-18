@@ -1,0 +1,43 @@
+.layout-4{
+    width: 100%;
+    height: 100%;
+    /* background: lightblue; */
+
+    *{
+         /* border: 0.5mm dashed blue;  */
+    }
+
+    img{
+        width: 100%;
+        height: 80mm;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+        border-radius: 3mm 3mm 0 0;
+    }
+    
+    header{
+        margin-bottom: 12mm;
+        padding-top: 12mm;
+        padding-left: 6mm;
+        
+    }
+
+
+    .article-left{
+        /* background: yellow; */
+        float: left;        
+        height: calc(100% - 100mm);
+        width: 50%;
+        position: relative;    
+        padding: 3mm;    
+    }
+    .article-right{
+        /* background: lightgrey; */
+        float: right;
+        height: calc(100% - 100mm);
+        width: 50%;
+        position: relative;
+        padding: 3mm;
+        
+    }
+}
