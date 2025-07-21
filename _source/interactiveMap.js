@@ -9,6 +9,9 @@ const info = document.getElementById('interactive-map-info');
 const buttonLoadMap = document.getElementById("buttonLoadMap");
 const showOptionsContainer = document.getElementById("show-options-container");
 const showOptions = document.querySelectorAll('.show-option')
+
+const showSectorsRadioButton = document.getElementById("show-sectors");
+
 const buttonOptions = document.getElementById("button-options");
 const searcher = document.getElementById("searcher");
 
@@ -54,35 +57,62 @@ function loadSelector(){
     let sortered = allRoads.sort((a, b) => a.name.localeCompare(b.name, 'es', { sensitivity: 'base' }));
 
     sortered.forEach(road => {
-        // Añadir opción al selector
         const option = document.createElement('option');
         option.value = road.id;
-        option.textContent = `${road.name}`;
+        option.textContent = road.name;
         selector.appendChild(option);
-    });    
+    });  
+    
+    dataParcels.forEach(point => {
+        const option = document.createElement('option');
+        option.value = point.id;
+        option.textContent = point.id;
+        selector.appendChild(option);
+    });
 }
 
 function moveToSelectorValue() {
     svgElement.querySelectorAll('.road').forEach(el => {        
         el.classList.remove('road-highlight');
     });
+
+     svgElement.querySelectorAll('.parcel').forEach(el => {        
+        if (!el.classList.contains('hidden')) el.classList.add('hidden');
+    });
     
     let id = selector.value;
     if (!id) { return;}
 
-    road = allRoads.find(r => r.id == id);
+    let point = undefined; 
+    let road = allRoads.find(r => r.id == id);
 
-    if (!road) return;
-    
-    let point = {
-        id:id,
-        x: road.points[0].x,
-        y: road.points[0].y,
-        duration: 3000,
-        width: 40,
-        height: 40
-    };
-    
+    if (road){
+        point = {
+            id:id,
+            x: road.points[0].x,
+            y: road.points[0].y,
+            duration: 3000,
+            width: 40,
+            height: 40
+        };
+
+        svgElement.getElementById(point.id).classList.add('road-highlight'); 
+    }
+    else {
+        let parcel = dataParcels.find(p => p.id == id);
+        if (parcel) {
+            point = {
+                id: parcel.id,
+                x: parcel.x,
+                y: parcel.y,
+                duration: 3000,
+                width: 40,
+                height: 40
+            };
+        }
+        svgElement.getElementById(point.id).classList.remove('hidden'); 
+    }
+        
     if (!point) return;
 
     radioAllStreet = document.getElementById("show-all-street")
@@ -94,8 +124,6 @@ function moveToSelectorValue() {
     }
 
     moveToPoint(point);
-
-    svgElement.getElementById(point.id).classList.add('road-highlight'); 
 }
 
 function createPolygon(points, color = 'rgba(52, 152, 219, 0.5)') {
@@ -111,15 +139,6 @@ function createPolygon(points, color = 'rgba(52, 152, 219, 0.5)') {
     polygon.setAttribute('stroke', color.replace('0.5)', '1)'));
     polygon.setAttribute('stroke-width', '2');
     polygon.setAttribute('stroke-linejoin', 'round');
-
-    // Hacer interactivo
-    // polygon.style.cursor = 'pointer';
-    // polygon.addEventListener('click', (e) => {
-    //     e.stopPropagation();
-    //     console.log('Polígono clickeado')
-    // });
-
-    // Agregar al grupo de Panzoom    
     return polygon;
 }
 //
@@ -145,8 +164,6 @@ function createPolyline(puntos, color = '#3388ff', opciones = {}) {
     const polyline = document.createElementNS(svgNS, 'polyline');
 
     // Convertir puntos a string de coordenadas
-    // console.log(puntos);
-    // debugger;
     const puntosStr = puntos.map(p => `${p.x},${p.y}`).join(' ');
     polyline.setAttribute('points', puntosStr);
 
@@ -175,30 +192,33 @@ function createPolyline(puntos, color = '#3388ff', opciones = {}) {
     return polyline;
 }
 
+function createCircle(point, color, r) {    
+    const marker = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    marker.setAttribute('cx', point.x);
+    marker.setAttribute('cy', point.y);
+    marker.setAttribute('r', r);
+    marker.setAttribute('fill', color);
+    marker.setAttribute('data-coords', `${point.x.toFixed(2)},${point.y.toFixed(2)}`);
+    return marker;
+}
+
 function moveToPoint(point) {
     const transform = pz.getTransform();
     const svgRect = svgElement.getBoundingClientRect();
 
-    // Calcular centro de la point
     const centerX = point.x + point.width / 2;
     const centerY = point.y + point.height / 2;
 
-    // Calcular posición para centrar
     const targetX = (svgRect.width / 2) - (centerX * transform.scale);
     const targetY = (svgRect.height / 2) - (centerY * transform.scale);
 
-    // Aplicar transformación
     pz.smoothMoveTo(targetX, targetY, point.duration);
 }
 
 function setZoom(level) {
-    if (!pz) return; // Asegurarse que Panzoom está inicializado
-
-    // Obtener el centro del viewport
+    if (!pz) return;
     const centerX = svgContainer.clientWidth / 2;
     const centerY = svgContainer.clientHeight / 2;
-
-    // Aplicar zoom
     pz.smoothZoomAbs(centerX, centerY, level);
 }
 
@@ -238,7 +258,6 @@ document.getElementById('buttonLoadMap').addEventListener('click', function() {
             filter.setAttribute('width', '200%');
             filter.setAttribute('height', '200%');
 
-            // Crear los elementos del filtro (pasos 1-4)
             const steps = [
                 // Paso 1: Desenfoque
                 `<feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur" />`,
@@ -258,14 +277,11 @@ document.getElementById('buttonLoadMap').addEventListener('click', function() {
                 </feMerge>`
             ];
 
-            // Insertar los pasos en el filtro
             filter.innerHTML = steps.join('');
 
-            // 4. Agregar el filtro al elemento <defs>
             defs.appendChild(filter);
             
             // Load panzoom
-
             panzoomGroup.id = 'panzoom-group';
 
             while (svgElement.firstChild) {
@@ -281,9 +297,8 @@ document.getElementById('buttonLoadMap').addEventListener('click', function() {
                 minZoom: 0.20,
                 bounds: true,
                 beforeWheel: function(e) {
-                    e.preventDefault(); // ¡Esto es clave!
+                    e.preventDefault(); 
                     e.stopPropagation();
-                    console.log("yo");
                     return false;
                 }
             });
@@ -339,7 +354,7 @@ document.getElementById('buttonLoadMap').addEventListener('click', function() {
             });
 
             // Load roads data
-              // Dibujar todas las calles encontradas
+            // Dibujar todas las calles encontradas
             allRoads = extractAllRoads(dataRoads);
 
             allRoads.forEach(street => {
@@ -377,31 +392,42 @@ document.getElementById('buttonLoadMap').addEventListener('click', function() {
                 panzoomGroup.appendChild(polyline);
             });
 
+            // Load parcels data
+            dataParcels.forEach(point => {
+                let circle = createCircle(point, 'rgba(255, 0, 0, 1)', 20);
+                circle.classList.add("parcel");
+                circle.classList.add("hidden");
+                circle.setAttribute('id', point.id);
+                
+                // Hacer interactivo
+                circle.style.cursor = 'all-scroll';            
+
+                panzoomGroup.appendChild(circle);
+            });
+           
             // Add events
             window.addEventListener('resize', resizeSVG);
 
             showOptions.forEach( radio => {
                 radio.addEventListener('change', function(){
-                    if (radio.id === "show-all-street"){
-                        svgElement.querySelectorAll(".sector").forEach(sector => sector.classList.add("hidden"));
+                    if (radio.id === "show-all-street"){                        
                         svgElement.querySelectorAll(".passage").forEach(passage => passage.classList.remove("hidden"));
                         svgElement.querySelectorAll(".local-street").forEach(localStreet => localStreet.classList.remove("hidden"));
-                        svgElement.querySelectorAll(".collector-street").forEach(collectorStreet => collectorStreet.classList.remove("hidden"));
-                        svgElement.querySelectorAll(".principal-street").forEach(principalStreet => principalStreet.classList.remove("hidden"));
                     }
-                    else if (radio.id === "show-principals"){
-
-                        svgElement.querySelectorAll(".sector").forEach(sector => sector.classList.add("hidden"));
+                    else if (radio.id === "show-principals"){                        
                         svgElement.querySelectorAll(".passage").forEach(passage => passage.classList.add("hidden"));
-                        svgElement.querySelectorAll(".local-street").forEach(localStreet => localStreet.classList.add("hidden"));
-                        svgElement.querySelectorAll(".collector-street").forEach(collectorStreet => collectorStreet.classList.remove("hidden"));
-                        svgElement.querySelectorAll(".principal-street").forEach(principalStreet => principalStreet.classList.remove("hidden"));
-                        selector.value = "";
-                    }
-                    else if (radio.id === "show-sectors"){
-                        svgElement.querySelectorAll(".sector").forEach(sector => sector.classList.remove("hidden"));
+                        svgElement.querySelectorAll(".local-street").forEach(localStreet => localStreet.classList.add("hidden"));                        
                     }
                 });
+            });
+
+            showSectorsRadioButton.addEventListener('change', function() {
+                if (showSectorsRadioButton.checked) {           
+                    svgElement.querySelectorAll(".sector").forEach(sector => sector.classList.remove("hidden"));
+                }   
+                else {
+                    svgElement.querySelectorAll(".sector").forEach(sector => sector.classList.add("hidden"));
+                }   
             });
 
             selector.addEventListener('change', function (e) {
@@ -419,7 +445,7 @@ document.getElementById('buttonLoadMap').addEventListener('click', function() {
 
             setZoom(0.25);
             
-            notify("Enhorabuena, ya puedes usar el selector de vías.");
+            notify("Enhorabuena, ya puedes usar el selector para buscar vías o parcelas.", "#b5f5b5");
         })
         .catch(error => {
             notify(`Error: ${error.message}`, "red");
