@@ -419,10 +419,6 @@ const dataRoads =
                               {
                                 "x": 3166,
                                 "y": 550
-                              },
-                              {
-                                "x": 3135,
-                                "y": 453
                               }
                             ]
                           }
@@ -2585,7 +2581,7 @@ const dataRoads =
             "name": "Calle Picaflor 2",
             "class": "road local-street",
             "grossor": 22,
-            "color": "#A1C181FF",
+            "color": "#8338ECFF",
             "dotted": false,
             "points": [
               {
